@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://java.sun.com/jsf/passthrough">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<meta nome="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" type="text/css" href="css/estilos.css" />
+
+	<titulo>Cadastro de atividades</titulo>
+</h:head>
+
+<h:body>
+	<header> <nav
+		class="navbar navbar-expand-lg navbar-dark bg-info">
+	<div class="container">
+		<a href="index.html" class="navbar-brand">
+		<h5><span>Registrar Tarefas</span></h5>
+		</a>
+		<a href="buscar.xhtml">
+		<h:commandButton class="btn btn-warning" value="Gerenciar" />
+		</a>
+	</div>
+	</nav> </header>
+	<div class="container">
+		<div class="row red align-items-center justify-content-center">
+			<div class="align-self-center">
+				<h:panelGrid columns="2" cellpadding="50" cellspacing="1">
+				<h:form class="mt-4 mb-4">
+						<h5 class="display-5 mt-4 mb-4">Adicionar um responsável</h5>
+						<ul class="list-group">
+							<li class="list-group-item list-group-item-info">Nome<h:inputText
+									value="#{responsavelBean.responsavel.nome}" id="nome"
+									class="form-control input-md" /></li>
+						</ul>
+						<p></p>
+						<div class="text-center">
+							<h:commandButton value="Adicionar" class="btn btn-outline-success" 
+								action="#{responsavelBean.saveResponsavel()}" />
+						</div>
+					</h:form>
+					<h:form class="mt-4 mb-4">
+						<div class="text-center">
+							<h5 class="display-5 mt-4 mb-4">Atribuir uma tarefa</h5>
+							<ul class="list-group">
+								<li class="list-group-item list-group-item-info">Título<h:inputText
+										value="#{tarefaBean.tarefa.titulo}" id="titulo"
+										class="form-control input-md" /></li>
+								<li class="list-group-item list-group-item-info">Descrição<h:inputTextarea
+										value="#{tarefaBean.tarefa.descricao}" id="descricao"
+										class="form-control input-md" /></li>
+								<li class="list-group-item list-group-item-info">Prazo<h:inputText
+										value="#{tarefaBean.tarefa.deadline}" id="deadline"
+										class="form-control input-md" /></li>
+								<li class="list-group-item list-group-item-info" id="prioridade">Prioridade: <h:selectOneMenu
+										value="#{tarefaBean.tarefa.prioridade}">
+										<f:selectItem itemLabel="Baixo" itemValue="Baixo" />
+										<f:selectItem itemLabel="Médio" itemValue="Médio" />
+										<f:selectItem itemLabel="Alto" itemValue="Alto" />
+									</h:selectOneMenu></li>
+								<li class="list-group-item list-group-item-info" id="responsible">Atribuir a: <h:selectOneMenu
+										value="#{tarefaBean.responsavel.id}">
+										<f:selectItem itemLabel="Selecione um Responsável" />
+										<f:selectItems value="#{responsavelBean.listResponsaveis}" var="responsavel"
+											itemLabel="#{responsavel.nome}" itemValue="#{responsavel.id}" />
+									</h:selectOneMenu></li>
+								<li class="list-group-item list-group-item-info" id="status">Status: <h:selectOneMenu
+										value="#{tarefaBean.tarefa.status}">
+										<f:selectItem itemLabel="Em andamento" itemValue="false" />
+										<f:selectItem itemLabel="Concluído" itemValue="true" />
+									</h:selectOneMenu></li>
+							</ul>
+						</div>
+						<p></p>
+						<div class="text-center">
+							<h:commandButton value="Atribuir" class="btn btn-outline-success"
+								action="#{tarefaBean.saveTask()}" />
+						</div>
+
+					</h:form>
+					
+				</h:panelGrid>
+			</div>
+		</div>
+	</div>
+
+</h:body>
+</html>
