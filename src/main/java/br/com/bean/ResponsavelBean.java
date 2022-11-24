@@ -24,13 +24,13 @@ public class ResponsavelBean {
     public void saveResponsavel(){
         responsavelDAO.save(responsavel);
         listResponsaveis = responsavelDAO.listAll();
-       
     }
     
     @PostConstruct
     public void init () {
     	responsavel = new Responsavel(); 
     	responsavelDAO = new ResponsavelDAO();
+    	listResponsaveis = responsavelDAO.listAll();
     }
 
 

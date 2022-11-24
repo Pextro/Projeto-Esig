@@ -7,7 +7,7 @@
 
 <h:head>
 	<meta charset="UTF-8" />
-	<meta nome="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
 	<!-- Bootstrap CSS -->
@@ -51,46 +51,45 @@
 							<li class="list-group-item" id="responsavel">Buscar pelo responsável: <h:selectOneMenu
 										value="#{tarefaBean.responsavel.id}">
 										<f:selectItem itemLabel="Selecione uma opção" itemValue=" " />
-										<f:selectItems value="#{tarefaBean.responsavels}" var="responsavel"
-											itemLabel="#{responsavel.nome}" itemValue="#{responsavel.id}" />
+										<f:selectItems value="#{responsavelBean.listResponsaveis}" 
+										var="responsavel" itemLabel="#{responsavel.nome}" itemValue="#{responsavel.id}" />
 									</h:selectOneMenu></li>
 							<li class="list-group-item" id="status">Status: <h:selectOneMenu
 									value="#{tarefaBean.tarefa.status}">
-									<f:selectItem itemLabel="Em andamento" itemValue="false" />
-									<f:selectItem itemLabel="Concluído" itemValue="true" />
+									<f:selectItem itemLabel="Em andamento" itemValue="true" />
+									<f:selectItem itemLabel="Concluído" itemValue="false" />
 								</h:selectOneMenu></li>
 						</ul>
 						<p></p>
 						<div class="text-center">
-							<h:commandButton value="Filtrar" class="btn btn-primary"
-								action="#{tarefaBean.findtarefa()}"/>
+							<h:commandButton value="Filtrar" class="btn btn-primary" action="#{tarefaBean.findTarefa()}"/>
 						</div>
 					</h:form>
 					<h:form>
-						<h:dataTable value="#{tarefaBean.tarefaList}" var="tarefas" class="table">
+						<h:dataTable value="#{tarefaBean.listaTarefas}" var="tarefas" class="table">
 
 							<h:column>
-								<f:facet nome="header"> Id</f:facet>
+								<f:facet name="header"> Id</f:facet>
                             #{tarefas.id}
                     </h:column>
 							<h:column>
-								<f:facet nome="header"> Título</f:facet>
+								<f:facet name="header"> Título</f:facet>
                             #{tarefas.titulo}
                     </h:column>
 							<h:column>
-								<f:facet nome="header"> Renponsável</f:facet>
+								<f:facet name="header"> Renponsável</f:facet>
                             #{tarefas.responsavel.nome}
                     </h:column>
 							<h:column>
-							<f:facet nome="header"> Ação</f:facet>
+							<f:facet name="header"> Ação</f:facet>
 								<h:commandButton value="Concluir" class="btn btn-success btn-sm"
-									action="#{tarefaBean.donetarefa(tarefas.id)}" />
+									action="#{tarefaBean.finalizarTarefa(tarefas.id)}" />
 									<span>  </span>
 								<h:commandButton value="Editar" class="btn btn-warning btn-sm"
 									action="#{tarefaBean.redirectToEdit(tarefas.id)}"/>
 									<span>  </span>
 								<h:commandButton value="Deletar" class="btn btn-danger btn-sm" onclick="if (!confirm('Deletar a tarefa?'))
-                                                return false" action="#{tarefaBean.delete(tarefas.id)}"/>
+                                                return false" action="#{tarefaBean.deletarTarefa(tarefas.id)}"/>
 							</h:column>
 						</h:dataTable>
 					</h:form>

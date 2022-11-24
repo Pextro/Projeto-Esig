@@ -13,7 +13,7 @@ import javax.faces.bean.ViewScoped;
 import java.util.List;
 import java.util.Objects;
 
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class TarefaBean {
 
@@ -32,6 +32,7 @@ public class TarefaBean {
         }else{
             dao.save(tarefa);
         }
+       tarefa = new Tarefa();
        listaTarefas = dao.listAll();
     }
 
@@ -54,10 +55,31 @@ public class TarefaBean {
 
         listaTarefas = dao.listAll();
     }
+    
+    public void findTarefa(){
+		tarefa.setResponsavel(null);
+		
+		if(responsavel.getId()!= null)
+			tarefa.setResponsavel(responsavel);
+
+		listaTarefas = dao.findByTarefa(tarefa);
+	}
+    
+    public String redirectToEdit(Long id) {
+		tarefa = dao.findById(id);
+		
+		return "index.xhtml?faces-redirect=true";
+	}
+	
+	public String redirectToIndex() {
+		tarefa = new Tarefa();
+		
+		return "index.xhtml?faces-redirect=true";
+	}
 
     @PostConstruct
     public void init() {
-        TarefaDAO dao = new TarefaDAO();
+        dao = new TarefaDAO();
         responsavel = new Responsavel();
         tarefa = new Tarefa();
         listaTarefas = dao.listAll();

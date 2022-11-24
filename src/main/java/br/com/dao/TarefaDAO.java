@@ -51,6 +51,21 @@ public class TarefaDAO {
         sessao.close();
         return tarefa;
     }
+    
+    @SuppressWarnings("unchecked")
+    public List<Tarefa> findByTarefa(Tarefa tarafe){
+    	Session sessao = HibernateConfig.getSessionFactory().openSession();
+		
+		List<Tarefa> tarefaList = sessao.getNamedQuery("Tarefa.findByForm")
+				.setParameter("titulo", tarafe.getTitulo())
+				.setParameter("id", tarafe.getId())
+				.setParameter("status", tarafe.getStatus())
+				.setParameter("responsavel", tarafe.getResponsavel())
+				.list();
+		sessao.close();
+		
+    	return tarefaList;
+    }
 
     public List<Tarefa> listAll(){
         Session sessao = HibernateConfig.getSessionFactory().openSession();
