@@ -25,7 +25,9 @@ public class TarefaBean {
     private TarefaDAO dao;
 
     public void saveTask(){
-        tarefa.setResponsavel(responsavel);
+    	if(Objects.isNull(tarefa.getResponsavel())) {
+        	tarefa.setResponsavel(responsavel);
+        }
 
         if(Objects.nonNull(tarefa.getId())){
             dao.update(tarefa);
